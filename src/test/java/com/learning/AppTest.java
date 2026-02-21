@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Простой тест для метода add класса App.
@@ -44,6 +45,6 @@ class AppTest {
         assertEquals (198772, response.jsonPath().getInt("petId"));
         assertEquals (7, response.jsonPath().getInt("quantity"));
         assertEquals ("approved", response.jsonPath().getString("status"));
-        assertEquals (true, response.jsonPath().getBoolean("complete"));
+        assertTrue(response.jsonPath().getBoolean("complete"));
     }
 }
