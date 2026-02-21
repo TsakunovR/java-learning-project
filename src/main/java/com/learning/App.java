@@ -33,7 +33,7 @@ public class App {
         System.out.println("Проект успешно запущен!");
 
         // Объявление переменной: тип int, имя result, значение — результат вызова add(2, 3)
-        int result = add(2, 3);
+        int result = add(2, 1000);
         System.out.println("Пример: 2 + 3 = " + result);
     }
 }
