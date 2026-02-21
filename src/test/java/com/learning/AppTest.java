@@ -4,7 +4,6 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import static jdk.internal.org.jline.utils.Colors.s;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,4 +55,29 @@ class AppTest {
         assertTrue(response.jsonPath().getBoolean("complete"));
 
     }
+    @Test
+    void requestToPetCreate() {
+        RestAssured.baseURI = "https://petstore.swagger.rv-school.ru/api/v3";
+
+        String requestBody = """
+               {
+               "id": 1,
+               "name": “Buddy”,
+               "status": “available”
+               }
+               """;
+        Response response = RestAssured
+                .given()
+                .body(requestBody)
+                .when()
+                .post("/pet")
+                .then()
+                .extract().response();
+
+        assertEquals(200, response.statusCode(), "неверный статус код");
+        assertEquals(1, response.jsonPath().getInt("id"));
+        assertEquals("Buddy", response.jsonPath().getString("name"));
+        assertEquals("available", response.jsonPath().getString("status"));
+    }
+
 }
