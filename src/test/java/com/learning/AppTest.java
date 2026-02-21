@@ -24,12 +24,9 @@ class AppTest {
         RestAssured.baseURI = "https://petstore.swagger.rv-school.ru/api/v3";
         String requestBody = """
                 {
-                "id":10,
-                "petId":198772,
-                "quantity":7,
-                "shipDate":"2026-02-21T15:23:48.515Z",
-                "status":"approved",
-                "complete":true
+                "id":1,
+                "name":"Buddy",
+                "status":"available"
                 }
                 """;
         Response response = RestAssured
@@ -37,14 +34,12 @@ class AppTest {
                 .header("Content-Type","application/json")
                 .body(requestBody)
                 .when()
-                .post("/store/order")
+                .post("/pet")
                 .then()
                 .extract().response();
         assertEquals (200, response.statusCode(), "Неверный статус код");
-        assertEquals (10, response.jsonPath().getInt("id"), "Неверный id заказа");
-        assertEquals (198772, response.jsonPath().getInt("petId"));
-        assertEquals (7, response.jsonPath().getInt("quantity"));
-        assertEquals ("approved", response.jsonPath().getString("status"));
-        assertTrue(response.jsonPath().getBoolean("complete"));
+        assertEquals (1, response.jsonPath().getInt("id"), "Неверный id питомца");
+        assertEquals ("Buddy", response.jsonPath().getString("name"));
+        assertEquals ("available", response.jsonPath().getString("status"));
     }
 }
