@@ -48,6 +48,31 @@ class AppTest {
         assertEquals("approved", response.jsonPath().getString("status"));
         assertTrue(response.jsonPath().getBoolean("complete"));
 
+    }
+
+    @Test
+    void addNewPetTest() {
+        RestAssured.baseURI = "https://petstore.swagger.rv-school.ru/api/v3";
+
+        String requestBody = """
+                {
+                  "id": 1,
+                  "name": “Buddy”,
+                  "status": “available”,
+                }
+                """;
+        Response response = RestAssured
+                .given()
+                .header("Content-Type","application/json")
+                .body(requestBody)
+                .when()
+                .post("/pet")
+                .then()
+                .extract().response();
+        assertEquals(200, response.statusCode(), "Неверный статус код");
+        assertEquals(1, response.jsonPath().getInt("id"), "Неверный id питомца");
+        assertEquals("Buddy", response.jsonPath().getString("name"), "Неверное имя питомца");
+        assertEquals("available", response.jsonPath().getString("status"));
 
     }
 }
