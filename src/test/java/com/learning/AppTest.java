@@ -44,7 +44,7 @@ class AppTest {
 
         assertEquals(200,response.getStatusCode(),"Неверный статус код");
         assertEquals(10,response.jsonPath().getInt("id"), "Неверный id");
-        assertEquals(198772,response.jsonPath().getInt("petId"), "Неверный Pet id");
+        assertEquals(198772,response.jsonPath().getInt("petId"), "Неверный petId");
         assertEquals(7,response.jsonPath().getInt("quantity"), "Неверное количество");
         assertEquals("approved",response.jsonPath().getString("status"), "Неверный status заказа");
         assertTrue(response.jsonPath().getBoolean("complete"));
