@@ -20,7 +20,7 @@ class AppTest {
         assertEquals(-145, App.add(2, -147));
     }
     @Test
-    void createStoreOrderTest() {
+    void createPetTest() {
         RestAssured.baseURI = "https://petstore.swagger.rv-school.ru/api/v3";
         String requestBody = """
                 {
